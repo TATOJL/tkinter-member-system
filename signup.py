@@ -2,11 +2,9 @@ from re import T
 from tkinter import *
 from tkinter.messagebox import showinfo,showerror,askyesno
 import pymssql
-from sqlalchemy import true
 from tkcalendar import *
 from PIL import Image,ImageTk
-def main():
-  
+def main():  
   #主視窗
   window=Tk()
   window.title('會員登入系統'.center(100))
@@ -163,18 +161,13 @@ def main():
   #登入的函數
   def login():
       member_act=var_member_act.get()
-      member_pwd=var_member_pwd.get()
-    #   from datetime import datetime
-    #   current_time=datetime.today().replace(microsecond=0) 
+      member_pwd=var_member_pwd.get() 
       conn = pymssql.connect(server='127.0.0.1',
                              user='sa',
                              password='password',
                              database='mis')
       cur = conn.cursor() 
       while True:
-            # if member_act=='' or member_pwd=='' :
-            #         showerror('警告','帳號或密碼為空')
-            #         break 
             sqlact = "SELECT * FROM members_data WHERE member_account = '"+ member_act +"'"
             cur.execute(sqlact)       
             actdata = cur.fetchone()
@@ -194,34 +187,7 @@ def main():
                       signup()
                       break
             else:
-                      break            
-            # for y in data2:
-            #     if str(member_act) == y['member_account'] :
-            #         if str(member_pwd) ==y['member_password']:
-            #             showinfo('歡迎','登入成功')
-            #             # cur.execute('INSERT INTO members_record VALUES(\'{}\',\'{}\')'.format(
-            #             #     y['member_id'],
-            #             #     current_time)
-            #             # ) 
-            #             conn.commit()
-            #             cur.close()
-            #             conn.close() 
-            #             window.destroy()
-            #             break
-            #         else:
-            #              showerror('警告','密碼錯誤')
-            #              break
-            #     elif member_act=='' or member_pwd=='' :
-            #              showerror('警告','帳號或密碼為空')
-            #              break
-            #     #不在資料庫中彈出是否註冊的輸入框
-            #     else:
-                #   is_signup=   askyesno('確認','您還沒有註冊，是否現在註冊')
-                #   if is_signup==True:
-                #       signup()
-                #       break
-                #   else:
-                #       break                 
+                      break                            
   def quit():
       is_quit=askyesno('確認','是否退出?')
       if is_quit==True:
